@@ -9,6 +9,14 @@ const Cart = ({history}) => {
   const { cart, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
 
+
+  const getTotal = () => {
+    return cart.reduce((currentValue, nextValue) => {
+      return currentValue + nextValue.count * nextValue.price;
+    }, 0);
+  };
+
+
   const saveOrderToDb = () => {
 //console.log("cart", JSON.stringify(cart, null, 4));
 userCart(cart, user.token)
@@ -39,11 +47,7 @@ userCart(cart, user.token)
       </table>
   )
 
-  const getTotal = () => {
-    return cart.reduce((currentValue, nextValue) => {
-      return currentValue + nextValue.count * nextValue.price;
-    }, 0);
-  };
+ 
 
   return (
     <div className="container-fluid pt-2">

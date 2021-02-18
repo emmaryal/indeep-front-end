@@ -16,7 +16,7 @@ const SideDrawer = () => {
       className="text-center"
       title={`Cart / ${cart.length} products`}
       placement="right"
-      closeable={false}
+      // closeable= "false"
       onClose={() => {
         dispatch({
           type: "SET_VISIBLE",

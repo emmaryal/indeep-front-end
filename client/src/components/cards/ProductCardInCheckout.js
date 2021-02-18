@@ -10,6 +10,9 @@ const ProductCardInCheckout = ({ p }) => {
 
   const handleQuantityChange = e => {
     let count = e.target.value < 1 ? 1 : e.target.value;
+    //let count = e.target.value
+
+    //CANT CHANGE INPUT FIELD WHEN THSI IS HERE......
     if (count > p.quantity) {
       toast.error(`Max available quantity : ${p.quantity}`);
       return;
@@ -70,6 +73,8 @@ const handleRemove=()=>{
         <td>{p.artist}</td>
         <td>{p.label}</td>
         <td>€{p.price}</td>
+        {console.log("P.COUNT=======>", p.count)}
+        {console.log("P.QUANTITY=======>", p.quantity)}
         <td className="text-center" >
           <input
             type="number"
