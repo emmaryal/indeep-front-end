@@ -29,7 +29,7 @@ import SubHome from './pages/sub/SubHome'
 import Shop from './pages/Shop'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
-
+import Payment from './pages/Payment'
 import SideDrawer from './components/drawer/SideDrawer'
 
 import { auth } from "./firebase";
@@ -104,6 +104,7 @@ const App = () => {
         <Route exact path='/shop' component={Shop} />
         <Route exact path='/cart' component={Cart} />
         <UserRoute exact path="/checkout" component={Checkout} />
+        <UserRoute exact path="/payment" component={Payment} />
 
 
 
