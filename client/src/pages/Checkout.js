@@ -22,13 +22,13 @@ const Checkout = ({history}) => {
 
   useEffect(() => {
     getUserCart(user.token).then((res) => {
-      console.log(
-        "user cart response - in checkout page",
-        JSON.stringify(res.data, null, 4)
-      ); //null & 4 are additional arguments given to JSON stringify to make it more readable
+    //   console.log(
+    //     "user cart response - in checkout page",
+    //     JSON.stringify(res.data, null, 4)
+    //   ); //null & 4 are additional arguments given to JSON stringify to make it more readable
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
-      console.log("products in checkout", products);
+    //   console.log("products in checkout", products);
     });
   }, []);
   const emptyCart = () => {
@@ -72,7 +72,7 @@ const Checkout = ({history}) => {
       </div>
       <div className="col-md-6">
         <h4>Order Summary</h4>
-        {JSON.stringify({ products })}
+        {/* {JSON.stringify({ products })} */}
 
         <hr />
         <p>Products {products.length} </p>
@@ -80,8 +80,8 @@ const Checkout = ({history}) => {
         <hr />
         {products.map((p, i) => (
           <div key={i}>
-            {console.log("p", p)}
-            {console.log("p.product", p.product)}
+            {/* {console.log("p", p)}
+            {console.log("p.product", p.product)} */}
             {/* {console.log("p", p)} */}
             <p>
               {p.product.title} x {p.count} = €{p.product.price * p.count}
