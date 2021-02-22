@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Card, Tabs, Tooltip } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import Record from "./../../images/record.jpeg";
 import ProductListItems from "./ProductListItems";
@@ -10,6 +10,8 @@ import Sound from "react-sound";
 import ReactAudioPlayer from "react-audio-player";
 import _ from 'lodash'
 import {useSelector, useDispatch} from 'react-redux'
+import {addToWishlist} from './../../functions/user'
+import { toast } from "react-toastify";
 
 
 const { TabPane } = Tabs;
@@ -20,7 +22,11 @@ const SingleProduct = ({ product }) => {
     //redux
     const {user, cart} = useSelector(state => ({...state}))
     const dispatch = useDispatch()
+    // router
+    let history = useHistory()
 
+
+   
 
     const handleAddToCart = () => {
       let cart = [];
@@ -48,6 +54,16 @@ const SingleProduct = ({ product }) => {
         })
       }
     };
+
+    const handleAddToWishlist = (e) => {
+      e.preventDefault();
+addToWishlist(product._id, user.token).then(res => {
+  console.log('ADDED TO WISHLIST', res.data);
+  toast.success('Added to wishlist')
+  history.push('/user/wishlist')
+})
+    }
+
 
   return (
     <>
@@ -88,11 +104,11 @@ const SingleProduct = ({ product }) => {
             </a>
           </Tooltip>,
 
-            <Link to="/">
+            <a onClick={handleAddToWishlist}>
               <HeartOutlined className="text-info" />
               <br />
               Add to Wishlist
-            </Link>,
+            </a>,
           ]}
         >
           <ProductListItems product={product} />

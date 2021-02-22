@@ -20,6 +20,8 @@ const Checkout = ({history}) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
 
+
+  //this runs when hit refresh page, want it to load on initial page render.....
   useEffect(() => {
     getUserCart(user.token).then((res) => {
     //   console.log(
@@ -29,6 +31,7 @@ const Checkout = ({history}) => {
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
     //   console.log("products in checkout", products);
+   
     });
   }, []);
   const emptyCart = () => {

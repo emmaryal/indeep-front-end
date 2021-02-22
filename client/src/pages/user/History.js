@@ -4,6 +4,9 @@ import { getUserOrders } from "./../../functions/user";
 import { useSelector, useDispatch } from "react-redux";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
+import ShowPaymentInfo from "./../../components/cards/ShowPaymentInfo";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import Invoice from "./../../components/order/Invoice";
 
 const History = () => {
   const [orders, setOrders] = useState([]);
@@ -26,35 +29,46 @@ const History = () => {
           <th scope="col">Title</th>
           <th scope="col">Artist</th>
           <th scope="col">Label</th>
-          <th scope="col">Count</th>
           <th scope="col">Price</th>
+          <th scope="col">Count</th>
+         
         </tr>
-       
       </thead>
-      <tbody>
-            {order.products.map((p,i) => (
-                <tr key={i}>
-                    <td><b>{p.product.title}</b></td>
-                    <td>{p.product.artist}</td>
-                    <td>{p.product.label}</td>
-                    <td>{p.count}</td>
-                    <td>€{p.product.price}</td>
 
-                </tr>
-            ))}
-            </tbody>
+      <tbody>
+        {order.products.map((p, i) => (
+          <tr key={i}>
+            <td>
+              <b>{p.product.title}</b>
+            </td>
+            <td>{p.product.artist}</td>
+            <td>{p.product.label}</td>
+            <td>€{p.product.price}</td>
+            <td>{p.count}</td>
+         
+          </tr>
+        ))}
+      </tbody>
     </table>
+  );
+
+  const showDownloadLink = (order) => (
+    <PDFDownloadLink
+      document={<Invoice order={order} />}
+      fileName="invoice.pdf"
+      className="btn btn-sm btn-block btn-outline-primary"
+    >
+      Download PDF
+    </PDFDownloadLink>
   );
 
   const showEachOrders = () =>
     orders.map((order, i) => (
       <div key={i} className="m-5 p-3 card">
-        <p>show payment info</p>
+        <ShowPaymentInfo order={order} />
         {showOrderInTable(order)}
         <div className="row">
-          <div className="col">
-            <p>pdf download</p>
-          </div>
+          <div className="col">{showDownloadLink(order)}</div>
         </div>
       </div>
     ));
@@ -65,7 +79,6 @@ const History = () => {
         <div className="col-md-2">
           <UserNav />
         </div>
-
         <div className="col text-center">
           <h4>
             {orders.length > 0 ? "User purchase orders" : "No purchase orders"}
@@ -76,4 +89,5 @@ const History = () => {
     </div>
   );
 };
+
 export default History;
