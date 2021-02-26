@@ -1,21 +1,24 @@
-.jumbotron {font-family: "Syne Mono", "Courier New", Courier, monospace;}
+.jumbotron {
+  font-family: "Syne Mono", "Courier New", Courier, monospace;
+  /* height: auto; */
+  padding: 15px 0 !important;
+}
 
 .slider img,
 .card-image {
-    height: 450px;
-    object-fit: cover;
+  height: 450px;
+  object-fit: cover;
 }
 
 .shopFilter {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 
 .carousel-container {
-    width: 500px;
-    height: 500px;
-    
+  width: 500px;
+  height: 500px;
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
