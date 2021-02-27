@@ -116,11 +116,13 @@ const Shop = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-2 pt-2">
+        <hr/>
           <h5>Search / Filter / Sort</h5>
           <hr />
 
           <Menu defaultOpenKeys={["1", "2"]} mode="inline">
-          <Search />
+          <Search className="m-4 pb-10" />
+          <hr />
             <SubMenu
               key="1"
               title={

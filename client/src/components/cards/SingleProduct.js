@@ -81,16 +81,18 @@ addToWishlist(product._id, user.token).then(res => {
       </div>
 
       <div className="col-md-3">
-        <Tabs type="card">
+        {/* <Tabs type="card">
           <TabPane tab="Description" key="1">
             {description && description}
 
             {/* <p>{description && description}</p> */}
-          </TabPane>
+          {/* </TabPane>
           <TabPane tab="Listening booth" key="2">
             <ReactAudioPlayer src={product.sound} autoPlay controls />
           </TabPane>
-        </Tabs>
+        </Tabs> */}
+        <div>{description && description}</div>
+        <div className="pt-5"><ReactAudioPlayer src={product.sound} autoPlay controls /></div>
       </div>
 
       <div className="col-md-4">

@@ -71,8 +71,8 @@ const ProductCreateForm = ({
       <div className="form-group">
         <label>Artist</label>
         <input
-          type="number"
-          name="quantity"
+          type="text"
+          name="artist"
           className="form-control"
           value={artist}
           onChange={handleChange}
@@ -82,8 +82,8 @@ const ProductCreateForm = ({
       <div className="form-group">
         <label>Label</label>
         <input
-          type="number"
-          name="quantity"
+          type="text"
+          name="label"
           className="form-control"
           value={label}
           onChange={handleChange}
@@ -92,16 +92,7 @@ const ProductCreateForm = ({
 
       
 
-      <div className="form-group">
-        <label>Status</label>
-        <input
-          type="string"
-          name="status"
-          className="form-control"
-          value={status}
-          onChange={handleChange}
-        />
-      </div>
+      
 
       <div className="form-group">
         <label>Format</label>
@@ -120,6 +111,18 @@ const ProductCreateForm = ({
       </div>
 
       <div className="form-group">
+        <label>Media Condition</label>
+        <select name="mediaCondition" className="form-control" onChange={handleChange}>
+          <option>Please select</option>
+          {mediaConditions.map((b) => (
+            <option key={b} value={b}>
+              {b}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
         <label>Sleeve Condition</label>
         <select name="sleeveCondition" className="form-control" onChange={handleChange}>
           <option>Please select</option>
@@ -131,17 +134,7 @@ const ProductCreateForm = ({
         </select>
       </div>
 
-      <div className="form-group">
-        <label>Media Condition</label>
-        <select name="mediaCondition" className="form-control" onChange={handleChange}>
-          <option>Please select</option>
-          {mediaConditions.map((b) => (
-            <option key={b} value={b}>
-              {b}
-            </option>
-          ))}
-        </select>
-      </div>
+    
 
       <div className="form-group">
         <label>Category</label>

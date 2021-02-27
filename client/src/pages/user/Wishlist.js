@@ -26,17 +26,19 @@ const Wishlist = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col md-2">
+        <div className="col-md-2">
           <UserNav />
         </div>
 
-        <div className="col">
+        <div className="col-md-10">
           <h4>Wishlist</h4>
           {wishlist.map((p) => (
             <div key={p._id} className="alert alert-secondary">
               <Link to="{`/product/${p.slug}`}">
                 {p.title} ~ {p.artist} ~ {p.label}
               </Link>
+
+              
               <span
                 onClick={() => handleRemove(p._id)}
                 className="btn btn-sm float-right"

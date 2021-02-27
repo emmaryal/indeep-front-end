@@ -21,8 +21,8 @@ const initialState = {
   images: [
     
   ],
-  mediaConditions: ["New", "Mint", "Near Mint", "VG+", "VG"],
-  sleeveConditions: ["New", "Mint", "Near Mint", "VG+", "VG"],
+  mediaConditions: ["New", "Mint", "Near Mint", "VG+", "VG", "Generic"],
+  sleeveConditions: ["New", "Mint", "Near Mint", "VG+", "VG", "Generic"],
   catno: "",
   formats: ['12"', '7"'],
   format: "",
