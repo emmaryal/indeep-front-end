@@ -42,3 +42,4 @@ export const updateProduct = async (slug, product, authtoken) =>
 
   export const fetchProductsByFilter = async (arg) =>
   await axios.post(`${process.env.REACT_APP_API}/search/filters`, arg);
+

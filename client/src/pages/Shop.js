@@ -126,6 +126,12 @@ const Shop = () => {
     fetchProducts({ category: inTheState });
   };
 
+  const sortProducts = () => {
+
+    const sortedProducts = products.sort()
+    return sortedProducts
+  }
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -133,20 +139,21 @@ const Shop = () => {
         <hr />
         {/* <h5>Search / Filter / Sort</h5> */}
         <hr />
-        <div className="col-md-3" style={{ marginTop: "10px" }}>
-          <div style={{ display: "inline" }}><span className="h6" style={{ "display": "inline" }}>
-                  <EuroOutlined /> Filter by Price
-                </span>
+        <div className="col-md-1" style={{ marginTop: "10px" }}>
+          <div style={{ display: "inline" }}>
+                  {/* <EuroOutlined />  */}
+                  Filter by Price </div> </div>
+               <div className="col-md-2" style={{ display: "inline" }}>
             <Slider
-              className="ml-4 mr-4"
+              className="mr-2"
               tipFormatter={(value) => `€${value}`}
               range
               value={price}
               onChange={handleSlider}
               max="250" //or find max price from db
-            />
-          </div>
-        </div>
+            /></div>
+   
+       
         <div className="col-md-9">
           {" "}
           <div style={{ marginTop: "10px" }}>{showCategories()}</div>
@@ -202,6 +209,7 @@ const Shop = () => {
           null
         )}
         {products.length < 1 && <p>No products found</p>}
+        {console.log("products-----", products)}
         <div className="row pb-5" style={{ "background-color": "grey" }}>
           {products.map((p) => (
             <div className=" p-3" key={p._id}>

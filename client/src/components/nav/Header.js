@@ -32,7 +32,7 @@ const Header = () => {
 history.push('/login');
  };
  return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" className="mb-4">
     <Item key="home" icon={<HomeOutlined />}>
       <Link to="/">   Home  </Link>
     </Item>
