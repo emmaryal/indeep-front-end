@@ -15,6 +15,11 @@ const Home = () => {
         <Jumbotron text={["InDeep Records", "Rare & Hard to Find Vinyl"]} />
       </div>
 
+      <h5 className="text-center p-3 mt-5 mb-5 display-3 jumbotron ">
+        Categories
+      </h5>
+      <CategoryList />
+
       <h5 className="text-center  p-3 mt-5 mb-5 display-3 jumbotron ">
         New Arrivals
       </h5>
@@ -25,18 +30,15 @@ const Home = () => {
       </h5>
       <BestSellers />
 
-      <h5 className="text-center p-3 mt-5 mb-5 display-3 jumbotron ">
-        Categories
-      </h5>
-      <CategoryList />
-
+     
+{/* 
       <h4 className="text-center p-3 mt-5 mb-5 display-3 jumbotron ">
         Sub Categories
       </h4>
       <SubList />
 
       <br />
-      <br />
+      <br /> */}
     </>
   );
 };

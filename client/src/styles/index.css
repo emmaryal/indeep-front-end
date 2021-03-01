@@ -11,7 +11,7 @@
 }
 
 .shopFilter {
-  background-color: lightgrey;
+  background-color: white
 }
 
 .carousel-container {
@@ -21,4 +21,45 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.product-card-image{
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0;
+ padding: 0;
+  
+}
+
+.product-card-text{
+
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  text-align: center;
+  font-family: "Syne Mono", "Courier New", Courier, monospace;
+  font-weight: bold;
+ bottom: 0;
+ right: 0;
+ background: black;
+ color: white;
+ opacity: 0;
+ margin: 0;
+ padding: 0;
+ visibility: hidden;
+ -webkit-transition: visibility 0s, opacity 0.5s linear;
+ transition: visibility 0s, opacity 0.5s linear;
+}
+.product-card-image:hover {
+  cursor: pointer
+}
+
+.product-card-image:hover div {
+  width: 250px;
+  height: 250px;
+  visibility: visible;
+  opacity: 0.8;
+  margin: 0;
+ padding: 0;
 }

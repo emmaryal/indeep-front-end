@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Card, Tooltip } from "antd";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import record from "./../../images/record.jpeg";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import {useSelector, useDispatch} from 'react-redux'
-
+import { useSelector, useDispatch } from "react-redux";
 
 const { Meta } = Card;
 
@@ -14,10 +13,9 @@ const ProductCard = ({ product }) => {
   const { images, title, description, slug, artist, label, price } = product;
   //tooltip
   const [tooltip, setTooltip] = useState("Click to add");
-//redux
-const {user, cart} = useSelector(state => ({...state}))
-const dispatch = useDispatch()
-
+  //redux
+  const { user, cart } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     let cart = [];
@@ -33,26 +31,57 @@ const dispatch = useDispatch()
       localStorage.setItem("cart", JSON.stringify(unique));
       setTooltip("Added");
 
-
       // add to redux state
       dispatch({
         type: "ADD_TO_CART",
-        payload: unique
-      })
+        payload: unique,
+      });
       dispatch({
         type: "SET_VISIBLE",
-        payload: true
-      })
+        payload: true,
+      });
     }
   };
 
   return (
-    <>
-      <Card
+    <div className="product-card-image">
+      
+          <img
+            src={images && images.length ? images[0].url : record}
+            style={{ height: "250px", width: "250px" }}
+            
+          />
+        
+
+        
+        <div className="product-card-text" style={{ height: "250px", width: "250px" }}>
+          <br/><br/><p>{product.title}</p>
+          <p>{product.artist}</p>
+          <p>€{product.price}</p>
+          <br/>
+          <Link to={`/product/${slug}`}>
+            <EyeOutlined className="text-warning" />   View Product
+          </Link><br />
+          <a onClick={handleAddToCart}disabled={product.quantity < 1}>
+              <ShoppingCartOutlined className="text-danger" /> 
+              {product.quantity <1 ? '   Out of Stock' :'   Add to Cart'}
+            </a> 
+            
+            </div>
+        </div>
+       
+    
+  );
+};
+{
+  /* <Card
+      style={{ width: '250px', height: '250px' }}
         cover={
           <img
             src={images && images.length ? images[0].url : record}
-            style={{ height: "250px", objectFit: "cover" }}
+            style={{ height: "250px", width: '250px',
+            // objectFit: "cover" 
+            }}
             className="p-1"
           />
         }
@@ -68,20 +97,20 @@ const dispatch = useDispatch()
           </Tooltip>,
         ]}
       >
-        <Meta
+        {/* <Meta
           title={title}
 
           // artist={artist}
           // label={label}
-        />
-        {/* <div className="pt-3">
+        /> */
+}
+{
+  /* <div className="pt-3">
       <p>Artist: {artist}</p>
       <p>Label: {label}</p>
       <p>Price: €{price}</p>
-    </div> */}
-      </Card>
-    </>
-  );
-};
+    </div> */
+}
+// </Card> */}
 
 export default ProductCard;

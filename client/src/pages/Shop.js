@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {
   getProductsByCount,
-  fetchProductsByFilter
+  fetchProductsByFilter,
+  getProductsCount,
+  getProducts,
 } from "./../functions/product";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./../components/cards/ProductCard";
-import { Menu, Slider, Checkbox} from "antd";
+import { Menu, Slider, Checkbox } from "antd";
 import { EuroOutlined, DownSquareOutlined } from "@ant-design/icons";
 import { getCategories } from "./../functions/category";
-import Search from './../components/forms/Search'
+import Search from "./../components/forms/Search";
+import CategoryList from "../components/category/CategoryList";
+import { Pagination } from "antd";
 
-const { SubMenu} = Menu;
+const { SubMenu } = Menu;
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -19,6 +23,8 @@ const Shop = () => {
   const [ok, setOk] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
+  // const [page, setPage] = useState(1);
+  const [productsCount, setProductsCount] = useState(1);
 
   let dispatch = useDispatch();
   let { search } = useSelector((state) => ({ ...state }));
@@ -32,18 +38,27 @@ const Shop = () => {
 
   //load products on page load
   const loadAllProducts = () => {
-   getProductsByCount(2000).then((p) => {
-       
+    getProductsByCount(2000).then((p) => {
       setProducts(p.data);
       setLoading(false);
     });
   };
 
+  // useEffect(() => {
+  //   loadAllProducts();
+  // }, [page]);
+
+  useEffect(() => {
+    getProductsCount().then((res) => setProductsCount(res.data));
+  }, []);
+
   //load products based on user search input
   useEffect(() => {
     const delayed = setTimeout(() => {
       fetchProducts({ query: text });
-      if (!text) {loadAllProducts()}
+      if (!text) {
+        loadAllProducts();
+      }
     }, 300);
     return () => clearTimeout(delayed);
   }, [text]);
@@ -75,7 +90,7 @@ const Shop = () => {
   //load products based on category
   const showCategories = () =>
     categories.map((c) => (
-      <div key={c._id}>
+      <span key={c._id} style={{ display: "inline-flex" }}>
         <Checkbox
           onChange={handleCheck}
           className="pb-2 pl-4 pr-4"
@@ -87,15 +102,15 @@ const Shop = () => {
         </Checkbox>
 
         <br />
-      </div>
+      </span>
     ));
-// handle check for categories
+  // handle check for categories
   const handleCheck = (e) => {
-      dispatch({
-          type: 'SEARCH_QUERY',
-          payload: {text: ''}
-      });
-      setPrice([0,0])
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
     //console.log(e.target.value)
     let inTheState = [...categoryIds];
     let justChecked = e.target.value;
@@ -106,28 +121,45 @@ const Shop = () => {
     } else {
       inTheState.splice(foundInTheState, 1);
     }
-      setCategoryIds(inTheState);
-      console.log(inTheState);
-      fetchProducts({ category: inTheState });
-    
+    setCategoryIds(inTheState);
+    console.log(inTheState);
+    fetchProducts({ category: inTheState });
   };
 
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2 pt-2">
-        <hr/>
-          <h5>Search / Filter / Sort</h5>
-          <hr />
+        {/* <div className="col-md-2 pt-2"> */}
+        <hr />
+        {/* <h5>Search / Filter / Sort</h5> */}
+        <hr />
+        <div className="col-md-3" style={{ marginTop: "10px" }}>
+          <div style={{ display: "inline" }}><span className="h6" style={{ "display": "inline" }}>
+                  <EuroOutlined /> Filter by Price
+                </span>
+            <Slider
+              className="ml-4 mr-4"
+              tipFormatter={(value) => `€${value}`}
+              range
+              value={price}
+              onChange={handleSlider}
+              max="250" //or find max price from db
+            />
+          </div>
+        </div>
+        <div className="col-md-9">
+          {" "}
+          <div style={{ marginTop: "10px" }}>{showCategories()}</div>
+        </div>
 
-          <Menu defaultOpenKeys={["1", "2"]} mode="inline">
-          <Search className="m-4 pb-10" />
-          <hr />
+        {/* <Menu defaultOpenKeys={["1", "2"]} mode="inline"> */}
+        {/* <Search className="m-4 pb-10" /> */}
+        {/* <hr />
             <SubMenu
               key="1"
               title={
                 <span className="h6">
-                  <EuroOutlined /> Price
+                  <EuroOutlined /> Filter by Price
                 </span>
               }
             >
@@ -138,12 +170,12 @@ const Shop = () => {
                   range
                   value={price}
                   onChange={handleSlider}
-                  max="1000" //or find max price from db
+                  max="250" //or find max price from db
                 />
               </div>
-            </SubMenu>
-            {/* category */}
-            <SubMenu
+            </SubMenu> */}
+        {/* category */}
+        {/* <SubMenu
               key="2"
               title={
                 <span className="h6">
@@ -152,26 +184,33 @@ const Shop = () => {
               }
             >
               <div style={{ marginTop: "-10px" }}>{showCategories()}</div>
-            </SubMenu>
-          </Menu>
-        </div>
-        {/* main window */}
-        <div className="col-md-9 pt-2">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4 className="text-danger">Products</h4>
-          )}
-          {products.length < 1 && <p>No products found</p>}
-          <div className="row pb-5">
-            {products.map((p) => (
-              <div className="col-md-3 pb-3" key={p._id}>
-                <ProductCard product={p} />
-              </div>
-            ))}
-          </div>
+            </SubMenu> */}
+        {/* <CategoryList />
+          </Menu> */}
+        {/* <Pagination
+        current={page}
+        total={productsCount}
+        defaultPageSize={30}
+        onChange={(page) => setPage(page)}
+      /> */}
+      </div>
+      {/* main window */}
+      <div className="col-md-12 pt-2">
+        {loading ? (
+          <h4 className="text-danger">Loading...</h4>
+        ) : (
+          null
+        )}
+        {products.length < 1 && <p>No products found</p>}
+        <div className="row pb-5" style={{ "background-color": "grey" }}>
+          {products.map((p) => (
+            <div className=" p-3" key={p._id}>
+              <ProductCard product={p} />
+            </div>
+          ))}
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 };

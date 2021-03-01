@@ -12,10 +12,13 @@ const AdminProductCard = ({ product, handleRemove }) => {
 
   return (
     <Card
+    style={{ width: '250px', height: '250px' }}
       cover={
         <img
           src={images && images.length ? images[0].url : record}
-          style={{ height: "250px",  objectFit: "cover" }}
+          style={{ height: "250px", width: "250px", 
+          // objectFit: "cover" 
+          }}
           className="p-1"
         />
       }
@@ -31,10 +34,10 @@ const AdminProductCard = ({ product, handleRemove }) => {
     >
       <Meta
         title={title}
-        
-      // description={`${description && description.substring(0, 40)}...`}
+
+        // description={`${description && description.substring(0, 40)}...`}
       />
-       {/* <div className="pt-3">
+      {/* <div className="pt-3">
       <p>Artist: {artist}</p>
       <p>Label: {label}</p>
       <p>Price: €{price}</p>

@@ -34,7 +34,8 @@ const Wishlist = () => {
           <h4>Wishlist</h4>
           {wishlist.map((p) => (
             <div key={p._id} className="alert alert-secondary">
-              <Link to="{`/product/${p.slug}`}">
+            <Link to={`/product/${p.slug}`}>
+              {p.slug}
                 {p.title} ~ {p.artist} ~ {p.label}
               </Link>
 
