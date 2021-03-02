@@ -19,7 +19,16 @@ const Checkout = ({history}) => {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
+  // const [didMount, setDidMount] = useState(false); 
 
+  // useEffect(() => {
+  //    setDidMount(true);
+  //    return () => setDidMount(false);
+  // }, [])
+  
+  // if(!didMount) {
+  //   return null;
+  // }
 
   //this runs when hit refresh page, want it to load on initial page render.....
   useEffect(() => {
@@ -33,7 +42,7 @@ const Checkout = ({history}) => {
     //   console.log("products in checkout", products);
    
     });
-  }, []);
+  });
   const emptyCart = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("cart");
